@@ -1,4 +1,5 @@
-mnt/*
+mnt/archive/*
+mnt/runs/*
 pyem/*
 dt5404_example.nc
 # Byte-compiled / optimized / DLL files
