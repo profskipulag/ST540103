@@ -2281,10 +2281,11 @@ class CARRASource:
         
         # ... convert to start and end datetimes ...
         start = datetime.datetime(year=year,month=month,day=day,hour=run_start)
-        
+        start0 = datetime.datetime(year=year,month=month,day=day,hour=0)
         duration = run_end-run_start
         
         end = start + datetime.timedelta(hours=duration)
+        end0 = start + datetime.timedelta(hours=duration+1)
 
         # ... and get the months we need to order.
         # Fuirst, we get the difference between the two dates in seconds 
@@ -2319,9 +2320,13 @@ class CARRASource:
         ds = xr.concat(ds_months,dim='time')
 
         # SUBSET BY DATE HERE!!!!
+        ds_sub = ds.sel(
+		time=(ds.time.values>= np.datetime64(start0))&
+		     (ds.time.values<= np.datetime64(end0 ))
+	)
 
         # write to the file specified in the meteo_data section
-        ds.to_netcdf(meteo_data.meteo_data_file)
+        ds_sub.to_netcdf(meteo_data.meteo_data_file)
 
         return(ds)
     
