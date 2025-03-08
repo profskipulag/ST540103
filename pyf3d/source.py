@@ -2321,8 +2321,8 @@ class CARRASource:
 
         # SUBSET BY DATE HERE!!!!
         ds_sub = ds.sel(
-		time=(ds.time.values>= np.datetime64(start0))&
-		     (ds.time.values<= np.datetime64(end0 ))
+		time=(ds.time.values>= np.datetime64(start0)-np.timedelta64(3, 'h'))&
+		     (ds.time.values<= np.datetime64(end0 )+np.timedelta64(3, 'h'))
 	)
 
         # write to the file specified in the meteo_data section
