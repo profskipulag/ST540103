@@ -72,6 +72,9 @@ file.source.update({
 })
 
 
+# ... and lastly we need to order the metdata
+file.get_meteodata()
+
 
 # Now we have a starting file, we create an emulator object ...
 em = Emulator(
