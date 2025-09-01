@@ -25,7 +25,12 @@ import nest_asyncio
 nest_asyncio.apply()
 import stan
 
-
+from pycompss.api.api import compss_wait_on, compss_barrier, compss_wait_on
+from pycompss.api.task import task
+from pycompss.api.IO import IO
+from pycompss.api.constraint import constraint
+from pycompss.api.binary import binary
+from pycompss.api.parameter import *
 
 
 
@@ -2694,6 +2699,24 @@ class CARRASource:
         return(path)
 
 
+
+
+
+@binary(
+        binary = "Fall3d.x",
+        args = "ALL {{infile}}",
+        working_dir="{{work_dir}}",
+        fail_by_exit_value=True
+    )
+@task(
+        infile=FILE_IN
+    )
+def run_fall3d(work_dir, infile):
+    pass
+
+
+
+
 class Fall3DBatch:
 
     def __init__(self, name:str, basefile:str|Fall3DInputFile, df:pd.DataFrame, basedir="mnt/runs",n_parallel = 5,
@@ -2858,9 +2881,42 @@ class Fall3DBatch:
             finished  = all([(p.poll() is not None) for i, p in processes.items()])
            
         print("Batch completed")
+
        
+    def run_deprecated(self, MAX_SIMULTANEOUS_RUNS=10):
+
+        print("#####################################################################################################")
+        print("inside run")
+        
+        files = copy.deepcopy(self.input_files)
+
+        #active_tasks = []
+        
+        for i, file in enumerate(files):
+
+
+            work_dir = os.path.dirname(file)
+
+            #active_tasks.append(run_fall3d(work_dir, file))
+
+            print("*******************************************************")
+            print("work_dir:", work_dir)
+            print("file:", file)
+            run_fall3d(work_dir, file)
             
-            
+            #if i % MAX_SIMULTANEOUS_RUNS:
+
+             #   print("Launched", MAX_SIMULTANEOUS_RUNS, "runs, waiting.")
+             #   compss_barrier() 
+
+              #  active_tasks = compss_wait_on(active_tasks)
+
+               # active_tasks = []
+
+
+        print("Batch completed")
+
+
     def get_meteo_and_run(self): 
     
     	for file in tqdm(self.input_files):

@@ -1,6 +1,12 @@
 mnt/runs/*
+mnt/tmp/*
+mnt/archive/*
+mnt/test3.nc
+dt5404_example2.nc
 pyem/*
-
+compss*
+*.grib
+*.idx
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

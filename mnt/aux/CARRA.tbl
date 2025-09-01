@@ -5,8 +5,8 @@
 |------------------------------------------|
 | READ_DIM |  DIM_DBS    |  DIM_CARRA      | 
 |------------------------------------------|
-|    1     |  DIM_LON    |  longitude      |
-|    1     |  DIM_LAT    |  latitude       |
+|    1     |  DIM_LON    |  x              |
+|    1     |  DIM_LAT    |  y              |
 |    1     |  DIM_LEV    |  isobaricInhPa  |
 |    1     |  DIM_TIME   |  time           |
 |------------------------------------------|
@@ -29,5 +29,4 @@
 |    1     |  VAR_V      |  v              |  V wind component
 |    1     |  VAR_W      |  wz             |  W wind component
 |    1     |  VAR_RH     |  r              |  Relative humidity
-|    1     |  VAR_PBLH   |  pblh           |  PBL height (m)
 |------------------------------------------|

@@ -54,7 +54,7 @@ class Emulator:
         #df['meteo_data.meteo_data_file'] = meteo_file_names
         #df['meteo_data.meteo_data_file'] = "mnt/runs/test_shared_meteo_data/joint_meteo_test2.nc"
 
-        df['meteo_data.meteo_data_file'] = self.base_dir + "/" + self.name + "/shared_meteo_data.nc" 
+        #df['meteo_data.meteo_data_file'] = self.base_dir + "/" + self.name + "/shared_meteo_data.nc" 
 
         # make sure everything we don't need is off
         df['model_output.output_3d_concentration'] = YesNo('no')
@@ -89,6 +89,7 @@ class Emulator:
 
     def initialise(self):
         # ... initialise the batch - creates the diurectories and input files ...
+        print("INITIALISING!!!!!!")
         self.batch.initialise()
 
     def get_meteo_data(self):
@@ -444,7 +445,7 @@ class Emulator:
         df_runs = pd.DataFrame(runs)
 
         #df_runs['meteo_data.meteo_data_file'] = "mnt/runs/test_shared_meteo_data/joint_meteo_test2.nc"
-        df_runs['meteo_data.meteo_data_file'] = self.base_dir + "/" + self.name + "/shared_meteo_data.nc" 
+        #df_runs['meteo_data.meteo_data_file'] = self.base_dir + "/" + self.name + "/shared_meteo_data.nc" 
 
         # and finally, we need to  make sure everything we don't need is off
         df_runs['model_output.output_3d_concentration'] = YesNo('no')
